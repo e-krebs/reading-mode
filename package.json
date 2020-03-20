@@ -1,0 +1,29 @@
+{
+  "name": "reading-mode",
+  "version": "0.0.1",
+  "description": "chrome extension to activate a reading mode",
+  "main": "src/index.ts",
+  "repository": "https://github.com/e-krebs/reading-mode",
+  "author": "Emmanuel Krebs <e-krebs@users.noreply.github.com>",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "clean": "del-cli -f .cache && del-cli -f build && del-cli readingMode.zip",
+    "build": "yarn clean && parcel build src/manifest.json -d build/ --no-source-maps",
+    "watch": "yarn clean && parcel watch src/manifest.json -d build/",
+    "zip": "cd build && bestzip ../readingMode.zip *"
+  },
+  "devDependencies": {
+    "@types/chrome": "^0.0.101",
+    "@types/node": "^13.9.2",
+    "bestzip": "^2.1.5",
+    "del-cli": "^3.0.0",
+    "parcel-bundler": "^1.12.4",
+    "parcel-plugin-web-extension": "^1.6.1",
+    "typescript": "^3.8.3"
+  },
+  "resolutions": {
+    "parcel-bundler/**/acorn": "^6.4.1",
+    "parcel-bundler/**/minimist": "^1.2.2"
+  }
+}

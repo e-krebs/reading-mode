@@ -1,0 +1,34 @@
+body {
+  overflow-y: hidden !important;
+  visibility: hidden !important;
+  background-image: none !important;
+}
+*:not(.reading-mode-displayed) {
+  display: none !important;
+  overflow-y: hidden !important;
+}
+body,
+*:not(.reading-mode-displayed),
+.reading-mode-parent {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+.reading-mode-article,
+.reading-mode-article-width {
+  visibility: visible !important;
+  position: fixed !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  max-height: 100% !important;
+  overflow-y: scroll !important;
+  padding-top: 20px !important;
+  padding-bottom: 20px !important;
+}
+.reading-mode-article-width {
+  width: 100% !important;
+  padding-right: max(calc(50% - 500px), 10px) !important;
+  padding-left: max(calc(50% - 500px), 10px) !important;
+}
+.reading-mode-bg-image {
+  background-size: contain !important;
+}
