@@ -3,6 +3,7 @@ import { cssId } from ".";
 const toHideList: string[] = [
   '_ad',
   '-week',
+  'article_list',
   'articles',
   'category',
   'commentaires',
@@ -15,6 +16,7 @@ const toHideList: string[] = [
   'related',
   'service',
   'share',
+  'sidebar',
   'social',
   'tags',
 ];
@@ -41,6 +43,15 @@ const shouldBeHidden = (node: Element): boolean => {
   return false;
 }
 
+const setUnset = (node: Element): boolean => {
+  const width = getComputedStyleFor(node, 'width');
+  if (width.unit && width.value) {
+    node.classList.add('reading-mode-width-unset');
+    return true;
+  }
+  return false;
+}
+
 const getComputedStyleFor = (elt: Element | null, property: string): any => {
   if (elt === null) return null;
   // @ts-ignore
@@ -54,12 +65,7 @@ export const prepareReadingMode = (article: HTMLElement) => {
   css.setAttribute('_href', chrome.extension.getURL('index.css'));
   document.body.appendChild(css);
 
-  let width: boolean = getComputedStyleFor(article, 'width')?.value === 'auto';
-  if (width && getComputedStyleFor(article.parentElement, 'width')?.value !== 'auto') {
-    width = false;
-  }
   article.classList.add('reading-mode-article');
-  if (width) article.classList.add('reading-mode-article-width');
 
   const nodes = Array.from(document.querySelectorAll('*'));
   for (var node of nodes) {
@@ -72,10 +78,12 @@ export const prepareReadingMode = (article: HTMLElement) => {
     if (article.contains(node)) {
       displayed = true;
 
-      if (node.tagName === 'ARTICLE') {
-        const width = getComputedStyleFor(node, 'width');
-        if (width.unit && width.value) {
-          node.classList.add('reading-mode-width-unset');
+      if (node.tagName === 'ARTICLE') setUnset(node);
+
+      if (node.classList.contains('article')) {
+        const isUnset = setUnset(node);
+        if (!isUnset && node.parentElement) {
+          setUnset(node.parentElement);
         }
       }
 

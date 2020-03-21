@@ -1,13 +1,13 @@
 body {
-  overflow-y: hidden !important;
   visibility: hidden !important;
   background-image: none !important;
 }
+body.reading-mode-center {
+  overflow-y: hidden;
+}
 .reading-mode-hidden,
-/* .reading-mode-article footer, */
 .reading-mode-article footer ~div {
   display: none !important;
-  overflow-y: hidden !important;
 }
 body,
 .reading-mode-hidden,
@@ -18,18 +18,19 @@ body,
 }
 .reading-mode-article {
   visibility: visible !important;
+  background-image: none !important;
+}
+.reading-mode-center .reading-mode-article {
   position: fixed !important;
-  left: 50% !important;
-  transform: translateX(-50%) !important;
   max-height: 100% !important;
   overflow-y: scroll !important;
-  padding-top: 20px !important;
-  padding-bottom: 20px !important;
-}
-.reading-mode-article-width {
-  width: 100% !important;
   padding-right: max(calc(50% - 500px), 10px) !important;
   padding-left: max(calc(50% - 500px), 10px) !important;
+}
+.reading-mode-center-more .reading-mode-article {
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  width: 100% !important;
 }
 .reading-mode-width-unset {
   width: unset !important;

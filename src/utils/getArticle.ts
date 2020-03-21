@@ -1,11 +1,12 @@
 const excludedTagNames: string[] = ['BODY'];
 
 export const getArticle = (): HTMLElement | null => {
-  let article = document.querySelector('article');
-  if (article === null) return null;
+  let article = document.querySelector('article')
+    ?? document.querySelector('.article')?.parentElement?.parentElement;
+  if (!article) return null;
 
   // if parent is a section => it is the article
-  if (article && article.parentElement?.tagName === 'SECTION') {
+  if (article.tagName !== 'SECTION' && article.parentElement?.tagName === 'SECTION') {
     article = article.parentElement;
   }
 
