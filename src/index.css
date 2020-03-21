@@ -3,18 +3,20 @@ body {
   visibility: hidden !important;
   background-image: none !important;
 }
-*:not(.reading-mode-displayed) {
+.reading-mode-hidden,
+/* .reading-mode-article footer, */
+.reading-mode-article footer ~div {
   display: none !important;
   overflow-y: hidden !important;
 }
 body,
-*:not(.reading-mode-displayed),
-.reading-mode-parent {
+.reading-mode-hidden,
+.reading-mode-parent,
+.no-margin-padding {
   margin: 0 !important;
   padding: 0 !important;
 }
-.reading-mode-article,
-.reading-mode-article-width {
+.reading-mode-article {
   visibility: visible !important;
   position: fixed !important;
   left: 50% !important;
@@ -29,6 +31,13 @@ body,
   padding-right: max(calc(50% - 500px), 10px) !important;
   padding-left: max(calc(50% - 500px), 10px) !important;
 }
+.reading-mode-width-unset {
+  width: unset !important;
+}
 .reading-mode-bg-image {
   background-size: contain !important;
+  background-repeat: no-repeat !important;
+}
+.reading-mode-article .article-content {
+  width: 100%;
 }

@@ -1,22 +1,33 @@
 import { message } from './typings';
-import { prepareReadingMode, toggleReadingMode } from './utils';
+import { prepareReadingMode, toggleReadingMode, getArticle } from './utils';
 
-let article = document.querySelector('article');
-if (article && article.parentElement?.tagName === 'SECTION') {
-  article = article.parentElement;
+const main = (article: HTMLElement | null) => {
+  chrome.extension.sendRequest(article === null
+    ? message.hideIcon
+    : message.showIconOff
+  );
+
+  if (article !== null) {
+    prepareReadingMode(article);
+
+    chrome.runtime.onMessage.addListener(msg => {
+      if (msg === message.readingMode) {
+        toggleReadingMode();
+      }
+    });
+  }
 }
 
-chrome.extension.sendRequest(article === null
-  ? message.hideIcon
-  : message.showIconOff
-);
+let nb = 0;
 
-if (article !== null) {
-  prepareReadingMode(article);
-
-  chrome.runtime.onMessage.addListener(msg => {
-    if (msg === message.readingMode) {
-      toggleReadingMode();
-    }
-  });
+const doJob = () => {
+  const article = getArticle();
+  if (article) {
+    main(article);
+  } else {
+    nb++;
+    setTimeout(doJob, 1000 * nb);
+  }
 }
+
+doJob();
