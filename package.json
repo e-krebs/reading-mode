@@ -24,6 +24,7 @@
   },
   "resolutions": {
     "parcel-bundler/**/acorn": "^6.4.1",
-    "parcel-bundler/**/minimist": "^1.2.2"
+    "parcel-bundler/**/minimist": "^1.2.2",
+    "parcel-bundler/**/node-forge": "^0.10.0"
   }
 }
