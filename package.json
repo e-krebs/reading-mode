@@ -23,7 +23,9 @@
     "typescript": "^3.8.3"
   },
   "resolutions": {
+    "del-cli/**/glob-parent": ">= 5.1.2",
     "parcel-plugin-web-extension/**/node-forge": ">= 0.10.0",
+    "parcel-bundler/**/glob-parent": ">= 5.1.2",
     "parcel-bundler/**/is-svg": ">= 4.2.2"
   }
 }
